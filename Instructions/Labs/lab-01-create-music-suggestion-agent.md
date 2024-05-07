@@ -4,7 +4,14 @@ lab:
   module: "Module 01: Build your kernel"
 ---
 
+# Lab: Create an AI music recommendation agent
+# Student lab manual
+
 In this lab, you create the code for an AI agent that can manage the user's music library and provide personalized song and concert recommendations. You use the Semantic Kernel SDK to build the AI agent and connect it to the large language model (LLM) service. The Semantic Kernel SDK allows you to create a smart application that can interact with the LLM service and provide personalized recommendations to the user.
+
+## Lab Scenario
+
+You are a developer for an international audio streaming service. You have been tasked with integrating the service with AI to provide users with a more personalized experience. The AI should be able to recommend songs and upcoming artist tours based on the user's listening history and preferences. You decide to use the Semantic Kernel SDK to build an AI agent that can interact with the large language model (LLM) service.
 
 ## Objectives
 
@@ -16,7 +23,9 @@ By completing this lab, you will accomplish the following:
 * Create Semantic Kernel functions and plugins
 * Use the Handlebars planner to automate tasks
 
-## Prerequisites
+## Lab Setup
+
+### Prerequisites
 
 To complete the exercise you need to have the following installed on your system:
 
@@ -24,11 +33,8 @@ To complete the exercise you need to have the following installed on your system
 * [The latest .NET 7.0 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
 * [The C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) for Visual Studio Code
 
-## Lab Scenario
 
-You are a developer for an international audio streaming service. You have been tasked with integrating the service with AI to provide users with a more personalized experience. The AI should be able to recommend songs and upcoming artist tours based on the user's listening history and preferences. You decide to use the Semantic Kernel SDK to build an AI agent that can interact with the large language model (LLM) service.
-
-## Prepare your development environment
+### Prepare your development environment
 
 For these exercises, a starter project is available for you to use. Use the following steps to set up the starter project:
 
@@ -638,3 +644,7 @@ In this task, you create a function from the Handlebars plan template and use it
     The prompt was able to suggest a concert to the user based on the list of recently played music and their location. You can also try setting other variables to true and see what happens!
 
 Now your code is able to perform different actions based on the user's input. Great work!
+
+### Review
+
+In this lab, you created an AI agent that can manage the user's music library and provide personalized song and concert recommendations. You used the Semantic Kernel SDK to build the AI agent and connect it to the large language model (LLM) service. You created custom plugins for your music library, used the Handlebars planner to automate suggestions, and created a function from the Handlebars plan template to automate suggestions based on the user's input. Congratulations on completing this lab!

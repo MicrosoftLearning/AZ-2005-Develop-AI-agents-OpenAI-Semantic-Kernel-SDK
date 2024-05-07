@@ -4,7 +4,14 @@ lab:
   module: "Module 01: Build your kernel"
 ---
 
-In this lab, TODO
+# Lab: Complete an AI travel agent
+# Student lab manual
+
+In this lab, you will complete an AI travel agent using the Semantic Kernel SDK. You will create an endpoint for the large language model (LLM) service, create Semantic Kernel functions, and use the automatic function calling capability of the Semantic Kernel SDK to route the user's intent to the appropriate plugins, including some prebuilt plugins that have been provided. You will also provide context to the LLM by using conversation history and allow the user to continue the conversation.
+
+## Lab Scenario
+
+You are a developer at a travel agency that specializes in creating personalized travel experiences for your customers. You have been tasked with creating an AI travel agent that can help customers learn more about travel destinations and plan activities for their trips. The AI travel agent should be able to convert currency amounts, suggest destinations and activities, provide helpful phrases in different languages, and translate phrases. The AI travel agent should also be able to provide contextually relevant responses to the user's requests by using conversation history.
 
 ## Objectives
 
@@ -14,9 +21,11 @@ By completing this lab, you will accomplish the following:
 * Build a Semantic Kernel object
 * Run prompts using the Semantic Kernel SDK
 * Create Semantic Kernel functions and plugins
-* TODO something about auto invoking functions
+* Use the automatic function calling capability of the Semantic Kernel SDK
 
-## Prerequisites
+## Lab Setup
+
+### Prerequisites
 
 To complete the exercise you need to have the following installed on your system:
 
@@ -24,11 +33,7 @@ To complete the exercise you need to have the following installed on your system
 * [The latest .NET 7.0 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
 * [The C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) for Visual Studio Code
 
-## Lab Scenario
-
-TODO
-
-## Prepare your development environment
+### Prepare your development environment
 
 For these exercises, a starter project is available for you to use. Use the following steps to set up the starter project:
 
@@ -90,9 +95,20 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. Under **Resource Management**, go to **Keys and Endpoint**.
 
-    You'll use the data here in the next task to build your kernel. Remember to keep your keys private and secure!
+    You'll use these values in the next task to build your kernel. Remember to keep your keys private and secure!
 
-TODO copy info to Program.cs
+1. Open the **Program.cs** file in Visual Studio Code.
+
+1. Update the following variables with your Azure Open AI Services deployment name, API key, endpoint
+
+    ```csharp
+    string yourDeploymentName = "";
+    string yourEndpoint = "";
+    string yourKey = "";
+    ```
+
+    > [!NOTE]
+    > The deployment model must be "gpt-35-turbo-16k" for some of the Semantic Kernel SDK features to work.
 
 ### Task 2: Create a native function
 
@@ -151,9 +167,6 @@ In this task, you create a native function that can convert an amount from a bas
     ```
 
     In this code, you use the `Currency.Currencies` dictionary to get the `Currency` object for the target and base currencies. You then use the `Currency` object to convert the amount from the base currency to the target currency. Finally, you return a string with the converted amount. Next, let's test your plugin.
-
-    > [!NOTE]
-    > When using the Semantic Kernel SDK in your own projects, you don't need to hardcode data into files if you have access to RESTful APIs. Instead, you can use the `Plugins.Core.HttpClient` plugin to retrieve data from APIs.
 
 1. In the `Program.cs` file, import and invoke your new plugin function with the following code:
 
@@ -264,11 +277,9 @@ In this task, you run your application and verify your code is working correctly
     ```
 
     > [!NOTE]
-    > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder. You may need to adjust the prompt in the skprompt.txt file to produce more exact results.
+    > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder. You may need to adjust the prompt in the `skprompt.txt` file to produce more exact results.
 
-Now you have a plugin that can convert an amount from one currency to another, and a prompt that can be used to parse the user's input into a format the `ConvertAmount` function can use.
-
-TODO tie it with the scenario
+Now you have a plugin that can convert an amount from one currency to another, and a prompt that can be used to parse the user's input into a format the `ConvertAmount` function can use. This will allow users to easily convert currency amounts using your AI travel agent.
 
 ## Exercise 2: Automate plugin selection based on user intent
 
@@ -440,7 +451,7 @@ In this task, you run your application and verify your code is working correctly
     ...
     ```
 
-    The intent should be routed to your default case and the LLM should handle the request for a chicken satay recipe, how delicious!
+    The intent should be routed to your default case and the LLM should handle the request for a chicken satay recipe.
 
     > [!NOTE]
     > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder.
@@ -620,3 +631,7 @@ In this task, you run your application and verify the code is working correctly.
     > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder.
 
 You can continue to test the application with different prompts and context cues. Great work! You've successfully provided context cues to the LLM and adjusted the code to allow the user to continue the conversation.
+
+### Review
+
+In this lab, you created an endpoint for the large language model (LLM) service, built a Semantic Kernel object, ran prompts using the Semantic Kernel SDK, created Semantic Kernel functions and plugins, and used the automatic function calling capability of the Semantic Kernel SDK to route the user's intent to the appropriate plugins. You also provided context to the LLM by using conversation history and allowed the user to continue the conversation. Congratulations on completing this lab!
