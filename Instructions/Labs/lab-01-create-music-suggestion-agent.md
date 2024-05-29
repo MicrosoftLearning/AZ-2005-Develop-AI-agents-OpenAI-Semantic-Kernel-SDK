@@ -39,7 +39,7 @@ To complete the exercise you need to have the following installed on your system
 For these exercises, a starter project is available for you to use. Use the following steps to set up the starter project:
 
 > [!IMPORTANT]
-> You must have .NET Framework 8.0 installed as well as the extensions VS Code extensions for C# and Nuget.
+> You must have .NET Framework 8.0 installed as well as the extensions VS Code extensions for C# and NuGet Package Manager.
 
 1. Download the zip file located at `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/01/Lab-01-Starter.zip`.
 
