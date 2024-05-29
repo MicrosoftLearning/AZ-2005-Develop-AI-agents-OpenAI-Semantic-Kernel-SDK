@@ -38,27 +38,15 @@ To complete the exercise you need to have the following installed on your system
 For these exercises, a starter project is available for you to use. Use the following steps to set up the starter project:
 
 > [!IMPORTANT]
-> You must have .NET Framework 8.0 installed and a Github account to complete these steps.
+> You must have .NET Framework 8.0 installed as well as the extensions VS Code extensions for C# and Nuget.
 
-1. Open Visual Studio Code.
+1. Download the zip file located at `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/02/Lab-02-Starter.zip`.
 
-1. Under the Visual Studio Code **Start** section, select **Clone Git Repository**.
+1. Extract the contents of the zip file to a location that is easy to find and remember, such as a folder on your Desktop.
 
-1. In the URL bar, enter `https://github.com/MicrosoftLearning/MSLearn-Develop-AI-Agents-with-Azure-OpenAI-and-Semantic-Kernel-SDK.git`
+1. Open Visual Studio Code and select **File** > **Open Folder**.
 
-1. In the File Explorer, create a new folder in a location that is easy to find and remember, such as a folder in your Desktop.
-
-1. Click the **Select as Repository Destination** button.
-
-    You need to be signed in to GitHub to successfully clone the project.
-
-1. Open the project in Visual Studio Code.
-
-1. In Explorer, right-click the **Lab01-create-music-recommendations-agent/Lab01-Project** folder and click **Open in Integrated Terminal**.
-
-1. Expand the **Lab01-create-music-recommendations-agent/Lab01-Project** folder.
-
-    You should see a "Program.cs" file.
+1. Navigate to the **Starter** folder you extracted and select **Select Folder**.
 
 1. Open the **Program.cs** file in the code editor.
 
@@ -97,7 +85,7 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
     You'll use these values in the next task to build your kernel. Remember to keep your keys private and secure!
 
-1. Open the **Program.cs** file in Visual Studio Code.
+1. Return to the **Program.cs** file in Visual Studio Code.
 
 1. Update the following variables with your Azure Open AI Services deployment name, API key, endpoint
 
