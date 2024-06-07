@@ -92,7 +92,7 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
     ```csharp
     string yourDeploymentName = "";
     string yourEndpoint = "";
-    string yourKey = "";
+    string yourApiKey = "";
     ```
 
     > [!NOTE]

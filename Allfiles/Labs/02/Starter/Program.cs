@@ -8,13 +8,13 @@ using Microsoft.SemanticKernel.Plugins.Core;
 
 string yourDeploymentName = "";
 string yourEndpoint = "";
-string yourKey = "";
+string yourApiKey = "";
 
 var builder = Kernel.CreateBuilder();
-builder.Services.AddAzureOpenAIChatCompletion(
+builder.AddAzureOpenAIChatCompletion(
     yourDeploymentName,
     yourEndpoint,
-    yourKey,
+    yourApiKey,
     "gpt-35-turbo-16k");
 var kernel = builder.Build();
 
