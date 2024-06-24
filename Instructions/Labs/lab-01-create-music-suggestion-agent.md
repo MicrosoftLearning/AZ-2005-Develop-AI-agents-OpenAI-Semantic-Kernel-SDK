@@ -573,7 +573,7 @@ In this task, you create a function from the Handlebars plan template and use it
         "deployment-model");
     var kernel = builder.Build();
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
-    kernel.ImportPluginFromType<MusicConcertsPlugin>();
+    kernel.ImportPluginFromType<MusicConcertPlugin>();
     kernel.ImportPluginFromPromptDirectory("Prompts");
     
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
