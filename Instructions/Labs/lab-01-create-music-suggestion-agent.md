@@ -72,7 +72,7 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. In the **Azure OpenAI Studio**, select **Deployments** page.
 
-![A screenshot of the Azure OpenAI deployments page.](../media/model-deployments.png)
+    ![A screenshot of the Azure OpenAI deployments page.](../media/model-deployments.png)
 
 1. In the **Deployments** page, select **Create New Deployment** then fill the **Deploy Model** popup.
 
