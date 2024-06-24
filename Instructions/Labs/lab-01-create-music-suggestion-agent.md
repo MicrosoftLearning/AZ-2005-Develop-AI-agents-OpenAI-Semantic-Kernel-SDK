@@ -70,9 +70,11 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. On the **Overview** page, select **Go to Azure OpenAI Studio**.
 
-:::image type="content" source="../media/model-deployments.png" alt-text="A screenshot of the Azure OpenAI deployments page.":::
+1. In the **Azure OpenAI Studio**, select **Deployments** page.
 
-1. Select **Create New Deployment** then **Deploy Model**.
+![A screenshot of the Azure OpenAI deployments page.](../media/model-deployments.png)
+
+1. In the **Deployments** page, select **Create New Deployment** then fill the **Deploy Model** popup.
 
 1. Under **Select a model**, select **gpt-35-turbo-16k**.
 
