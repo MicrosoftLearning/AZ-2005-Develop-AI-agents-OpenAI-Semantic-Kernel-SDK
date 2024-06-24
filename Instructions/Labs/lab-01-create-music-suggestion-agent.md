@@ -70,9 +70,11 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. On the **Overview** page, select **Go to Azure OpenAI Studio**.
 
-:::image type="content" source="../media/model-deployments.png" alt-text="A screenshot of the Azure OpenAI deployments page.":::
+1. In the **Azure OpenAI Studio**, select **Deployments** page.
 
-1. Select **Create New Deployment** then **Deploy Model**.
+    ![A screenshot of the Azure OpenAI deployments page.](../media/model-deployments.png)
+
+1. In the **Deployments** page, select **Create New Deployment** then fill the **Deploy Model** popup.
 
 1. Under **Select a model**, select **gpt-35-turbo-16k**.
 
@@ -114,6 +116,9 @@ In this exercise, you learn how to build your first Semantic Kernel SDK project.
 
     Be sure to replace the placeholders with the values from your Azure resource.
 
+    > **Note:** You can retrieve the values ​​of `your-endpoint` and `your-api-key` from the **Keys and Endpoint** page in the Azure portal, while `your-deployment-name` is the name you set in the deployment of the Azure OpenAI model and `deployment- model` is the model type used (if you followed the instructions the value is **gpt-35-turbo-16k**)
+
+
 1. To verify that your kernel and endpoint is working, enter the following code:
 
     ```c#
@@ -136,7 +141,7 @@ In this exercise, you create custom plugins for your music library. You create f
 
 In this task, you create a plugin that allows you to add songs to the user's recently played list and get the list of recently played songs. For simplicity, the recently played songs are stored in a text file.
 
-1. Create a new folder in the 'Lab01-Project' directory and name it 'Plugins.'
+1. Create a new folder in the 'Lab01-Project/Starter' directory and name it 'Plugins.'
 
 1. In the 'Plugins' folder, create a new file 'MusicLibrary.cs'
 
@@ -356,7 +361,7 @@ In this task, you create a plugin that retrieves upcoming concert details. You a
     {{MusicLibraryPlugin.GetRecentPlays}}
 
     This is a list of upcoming concert details:
-    {{MusicConcertsPlugin.GetConcerts}}
+    {{MusicConcertPlugin.GetTours}}
 
     Suggest an upcoming concert based on the user's recently played songs. 
     The user lives in {{$location}}, 
@@ -370,7 +375,7 @@ In this task, you create a plugin that retrieves upcoming concert details. You a
     ```c#
     var kernel = builder.Build();    
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
-    kernel.ImportPluginFromType<MusicConcertsPlugin>();
+    kernel.ImportPluginFromType<MusicConcertPlugin>();
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
@@ -432,6 +437,13 @@ In this task, you generate a plan template using the Handlebars planner. The pla
     var result = await plan.InvokeAsync(kernel);
 
     Console.WriteLine($"{result}");
+    ```
+
+    > **Note:** If you get compile errors from Visual Studio Code, add the following piece of code to the top of the 'Program.cs' file:
+
+    ```c#
+    #pragma warning disable SKEXP0060
+    using Microsoft.SemanticKernel.Planning.Handlebars;
     ```
 
 1. In the terminal, enter `dotnet run`
@@ -561,7 +573,7 @@ In this task, you create a function from the Handlebars plan template and use it
         "deployment-model");
     var kernel = builder.Build();
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
-    kernel.ImportPluginFromType<MusicConcertsPlugin>();
+    kernel.ImportPluginFromType<MusicConcertPlugin>();
     kernel.ImportPluginFromPromptDirectory("Prompts");
     
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
@@ -582,11 +594,17 @@ In this task, you create a function from the Handlebars plan template and use it
     string template = File.ReadAllText($"handlebarsTemplate.txt");
 
     var handlebarsPromptFunction = kernel.CreateFunctionFromPrompt(
-        new() {
+        new PromptTemplateConfig() {
             Template = template,
             TemplateFormat = "handlebars"
         }, new HandlebarsPromptTemplateFactory()
     );
+    ```
+
+    > **Note:** If you get compile errors from Visual Studio Code, add the following piece of code to the top of the 'Program.cs' file:
+
+    ```c#
+    using Microsoft.SemanticKernel.PromptTemplates.Handlebars;
     ```
 
     In this code, you pass a `Template` object to the kernel method `CreateFunctionFromPrompt` along with the `TemplateFormat`. `CreateFunctionFromPrompt` also accepts an `IPromptTemplateFactory` type that tells the kernel how to parse a given template. Since you're using a Handlebars template, you use the `HandlebarsPromptTemplateFactory` type.
