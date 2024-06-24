@@ -439,6 +439,13 @@ In this task, you generate a plan template using the Handlebars planner. The pla
     Console.WriteLine($"{result}");
     ```
 
+    > **Note:** If you get compile errors from Visual Studio Code, add the following piece of code to the top of the 'Program.cs' file:
+
+    ```c#
+    #pragma warning disable SKEXP0060
+    using Microsoft.SemanticKernel.Planning.Handlebars;
+    ```
+
 1. In the terminal, enter `dotnet run`
 
     You should see a response similar to the following output:
