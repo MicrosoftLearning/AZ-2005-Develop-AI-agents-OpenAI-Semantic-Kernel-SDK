@@ -594,11 +594,17 @@ In this task, you create a function from the Handlebars plan template and use it
     string template = File.ReadAllText($"handlebarsTemplate.txt");
 
     var handlebarsPromptFunction = kernel.CreateFunctionFromPrompt(
-        new() {
+        new PromptTemplateConfig() {
             Template = template,
             TemplateFormat = "handlebars"
         }, new HandlebarsPromptTemplateFactory()
     );
+    ```
+
+    > **Note:** If you get compile errors from Visual Studio Code, add the following piece of code to the top of the 'Program.cs' file:
+
+    ```c#
+    using Microsoft.SemanticKernel.PromptTemplates.Handlebars;
     ```
 
     In this code, you pass a `Template` object to the kernel method `CreateFunctionFromPrompt` along with the `TemplateFormat`. `CreateFunctionFromPrompt` also accepts an `IPromptTemplateFactory` type that tells the kernel how to parse a given template. Since you're using a Handlebars template, you use the `HandlebarsPromptTemplateFactory` type.
