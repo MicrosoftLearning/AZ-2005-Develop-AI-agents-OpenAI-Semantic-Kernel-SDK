@@ -116,6 +116,9 @@ In this exercise, you learn how to build your first Semantic Kernel SDK project.
 
     Be sure to replace the placeholders with the values from your Azure resource.
 
+    > **Note:** You can retrieve the values ​​of `your-endpoint` and `your-api-key` from the **Keys and Endpoint** page in the Azure portal, while `your-deployment-name` is the name you set in the deployment of the Azure OpenAI model and `deployment- model` is the model type used (if you followed the instructions the value is **gpt-35-turbo-16k**)
+
+
 1. To verify that your kernel and endpoint is working, enter the following code:
 
     ```c#
