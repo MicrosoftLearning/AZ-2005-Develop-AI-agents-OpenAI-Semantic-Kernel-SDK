@@ -361,7 +361,7 @@ In this task, you create a plugin that retrieves upcoming concert details. You a
     {{MusicLibraryPlugin.GetRecentPlays}}
 
     This is a list of upcoming concert details:
-    {{MusicConcertsPlugin.GetConcerts}}
+    {{MusicConcertPlugin.GetTours}}
 
     Suggest an upcoming concert based on the user's recently played songs. 
     The user lives in {{$location}}, 
@@ -375,7 +375,7 @@ In this task, you create a plugin that retrieves upcoming concert details. You a
     ```c#
     var kernel = builder.Build();    
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
-    kernel.ImportPluginFromType<MusicConcertsPlugin>();
+    kernel.ImportPluginFromType<MusicConcertPlugin>();
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
