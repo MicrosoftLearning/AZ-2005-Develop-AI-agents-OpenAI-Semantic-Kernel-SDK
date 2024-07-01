@@ -122,7 +122,7 @@ In this exercise, you learn how to build your first Semantic Kernel SDK project.
     Console.WriteLine(result);
     ```
 
-1. Run the code and check that you see a response from the Azure Open AI model containing the top 5 most famous musicians in the world.
+1. Enter `dotnet run` to run the code and check that you see a response from the Azure Open AI model containing the top 5 most famous musicians in the world.
 
     The response comes from the Azure Open AI model you passed to the kernel. The Semantic Kernel SDK is able to connect to the large language model (LLM) and run the prompt. Notice how quickly you were able to receive responses from the LLM. The Semantic Kernel SDK makes building smart applications easy and efficient.
 
@@ -224,7 +224,7 @@ In this task, you create a plugin that allows you to add songs to the user's rec
     Added 'Danse' to recently played
     ```
 
-    If you open up 'RecentlyPlayed.txt,' you should see the new song added to the list.
+    If you open up 'Files/RecentlyPlayed.txt,' you should see the new song added to the list.
 
 ### Task 2: Provide personalized song recommendations
 
@@ -303,18 +303,18 @@ In this code, you combine your native functions with a semantic prompt. The nati
 
 In this task, you create a plugin that retrieves upcoming concert details. You also create a plugin that asks the LLM to suggest a concert based on the user's recently played songs and location.
 
-1. In the 'Plugins' folder, create a new file named 'MusicConcertPlugin.cs'
+1. In the 'Plugins' folder, create a new file named 'MusicConcertsPlugin.cs'
 
-1. In the MusicConcertPlugin' file, add the following code:
+1. In the MusicConcertsPlugin' file, add the following code:
 
     ```c#
     using System.ComponentModel;
     using Microsoft.SemanticKernel;
 
-    public class MusicConcertPlugin
+    public class MusicConcertsPlugin
     {
         [KernelFunction, Description("Get a list of upcoming concerts")]
-        public static string GetTours()
+        public static string GetConcerts()
         {
             string content = File.ReadAllText($"Files/ConcertDates.txt");
             return content;
@@ -417,11 +417,21 @@ In this task, you generate a plan template using the Handlebars planner. The pla
 1. In your 'Program.cs' file, update your code to the following:
 
     ```c#
+    using Microsoft.SemanticKernel;
+    using Microsoft.SemanticKernel.Planning.Handlebars;
+    
+    var builder = Kernel.CreateBuilder();
+    builder.AddAzureOpenAIChatCompletion(
+        "your-deployment-name",
+        "your-endpoint",
+        "your-api-key",
+        "deployment-model");
     var kernel = builder.Build();
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
-    kernel.ImportPluginFromType<MusicConcertPlugin>();
+    kernel.ImportPluginFromType<MusicConcertsPlugin>();
     kernel.ImportPluginFromPromptDirectory("Prompts");
 
+    #pragma warning disable SKEXP0060
     var planner = new HandlebarsPlanner(new HandlebarsPlannerOptions() { AllowLoops = true });
 
     string location = "Redmond WA USA";
@@ -433,6 +443,8 @@ In this task, you generate a plan template using the Handlebars planner. The pla
 
     Console.WriteLine($"{result}");
     ```
+
+    >[!NOTE] Since the Handlebars package is currently in preview, you may need to suppress the compiler warning to run the code.
 
 1. In the terminal, enter `dotnet run`
 
@@ -512,7 +524,7 @@ In this task, you generate a plan template using the Handlebars planner. The pla
 
     Next, you use this generated template to create your own Handlebars plan. 
 
-1. Create a new file named 'handlebarsTemplate.txt' with the following text:
+1. In the 'Files' directory, create a new file named 'HandlebarsTemplate.txt' with the following text:
 
     ```output
     {{set "addSong" addSong}}
@@ -553,6 +565,9 @@ In this task, you create a function from the Handlebars plan template and use it
 1. Remove the handlebars plans by modifying your existing code:
 
     ```c#
+    using Microsoft.SemanticKernel;
+    using Microsoft.SemanticKernel.PromptTemplates.Handlebars;
+
     var builder = Kernel.CreateBuilder();
     builder.AddAzureOpenAIChatCompletion(
         "your-deployment-name",
@@ -579,7 +594,7 @@ In this task, you create a function from the Handlebars plan template and use it
 1. Add code that reads the template file creates a function:
 
     ```c#
-    string template = File.ReadAllText($"handlebarsTemplate.txt");
+    string template = File.ReadAllText($"Files/HandlebarsTemplate.txt");
 
     var handlebarsPromptFunction = kernel.CreateFunctionFromPrompt(
         new() {
