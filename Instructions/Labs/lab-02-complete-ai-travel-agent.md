@@ -108,6 +108,8 @@ In this task, you create a native function that can convert an amount from a bas
 
     ```c#
     using AITravelAgent;
+    using System.ComponentModel;
+    using Microsoft.SemanticKernel;
 
     class CurrencyConverter
     {
@@ -247,6 +249,7 @@ In this task, you run your application and verify your code is working correctly
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
+    kernel.ImportPluginFromType<ConversationSummaryPlugin>();
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     var result = await kernel.InvokeAsync(prompts["GetTargetCurrencies"],
@@ -281,6 +284,7 @@ In this exercise, you detect the user's intent and route the conversation to the
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
+    kernel.ImportPluginFromType<ConversationSummaryPlugin>();
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     Console.WriteLine("What would you like to do?");
@@ -331,6 +335,7 @@ In this exercise, you detect the user's intent and route the conversation to the
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
+    kernel.ImportPluginFromType<ConversationSummaryPlugin>();
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     OpenAIPromptExecutionSettings settings = new()
@@ -526,12 +531,12 @@ In this exercise, you use the conversation history to provide context to the lar
           "description": "The destination a user wants to visit",
           "required": true
       }
-  ]
-  ```
+   ]
+   ```
 
 1. Navigate to **Prompts/SuggestActivities/skprompt.txt** and open the file
 
-1. Add a prompt to use the chat history:
+1. Replace the beginning half of the prompt with the following prompt that uses the chat history variable:
 
     ```html 
     You are an experienced travel agent. 
