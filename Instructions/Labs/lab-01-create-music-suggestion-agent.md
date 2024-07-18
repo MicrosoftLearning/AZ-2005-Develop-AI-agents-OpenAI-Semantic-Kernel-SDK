@@ -72,9 +72,9 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 :::image type="content" source="../media/model-deployments.png" alt-text="A screenshot of the Azure OpenAI deployments page.":::
 
-1. Select **Create New Deployment** then **Deploy Model**.
+1. Select **Create New Deployment** then on the deployment panel select **+Create New Deployment**.
 
-1. Under **Select a model**, select **gpt-35-turbo-16k**.
+1. On the **Deploy Model** pop-up, Under **Select a model**, select **gpt-35-turbo-16k**.
 
     Use the default Model version
 
@@ -140,9 +140,7 @@ In this task, you create a plugin that allows you to add songs to the user's rec
 
 1. In the 'Plugins' folder, create a new file 'MusicLibrary.cs'
 
-    First, create some quick functions to get and add songs to the user's "Recently Played" list.
-
-1. Enter the following code:
+1. First, create some quick functions to get and add songs to the user's "Recently Played" list. Enter the following code:
 
     ```c#
     using System.ComponentModel;
