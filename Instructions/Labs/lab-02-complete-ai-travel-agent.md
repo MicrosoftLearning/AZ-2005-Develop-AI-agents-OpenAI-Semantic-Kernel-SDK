@@ -73,7 +73,7 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. Select **Create New Deployment** then select **+Create New Deployment**.
 
-1. On the **Deploy Model** pup-up, select **gpt-35-turbo-16k**.
+1. On the **Deploy Model** pop-up, select **gpt-35-turbo-16k**.
 
     Use the default Model version
 
