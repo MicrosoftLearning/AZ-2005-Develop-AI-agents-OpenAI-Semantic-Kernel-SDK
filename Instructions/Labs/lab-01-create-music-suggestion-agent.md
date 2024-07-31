@@ -41,7 +41,11 @@ For these exercises, a starter project is available for you to use. Use the foll
 > [!IMPORTANT]
 > You must have .NET Framework 8.0 installed as well as the extensions VS Code extensions for C# and NuGet Package Manager.
 
-1. Download the zip file located at `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/01/Lab-01-Starter.zip`.
+1. Paste the following URL into a new browser window:
+   
+     `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/01/Lab-01-Starter.zip`
+
+1. Download the zip file by clicking the `...` button located on the upper right side of the page, or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>.
 
 1. Extract the contents of the zip file to a location that is easy to find and remember, such as a folder on your Desktop.
 
@@ -50,6 +54,9 @@ For these exercises, a starter project is available for you to use. Use the foll
 1. Navigate to the **Starter** folder you extracted and select **Select Folder**.
 
 1. Open the **Program.cs** file in the code editor.
+
+> [!NOTE]
+> If prompted to trust the files in the folder, select **Yes, I trust the authors** 
 
 ## Exercise 1: Run a prompt with the Semantic Kernel SDK
 
