@@ -40,7 +40,11 @@ For these exercises, a starter project is available for you to use. Use the foll
 > [!IMPORTANT]
 > You must have .NET Framework 8.0 installed as well as the extensions VS Code extensions for C# and NuGet Package Manager.
 
-1. Download the zip file located at `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/02/Lab-02-Starter.zip`.
+1. Paste the following URL into a new browser window:
+   
+     `https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK/blob/master/Allfiles/Labs/02/Lab-02-Starter.zip`
+
+1. Download the zip file by clicking the <kbd>...</kbd> button located on the upper right side of the page, or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>.
 
 1. Extract the contents of the zip file to a location that is easy to find and remember, such as a folder on your Desktop.
 
@@ -49,6 +53,9 @@ For these exercises, a starter project is available for you to use. Use the foll
 1. Navigate to the **Starter** folder you extracted and select **Select Folder**.
 
 1. Open the **Program.cs** file in the code editor.
+
+> [!NOTE]
+> If prompted to trust the files in the folder, select **Yes, I trust the authors**
 
 ## Exercise 1: Create a plugin with the Semantic Kernel SDK
 
@@ -102,9 +109,9 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 In this task, you create a native function that can convert an amount from a base currency currency to a target currency.
 
-1. Create a new file named `CurrencyConverter.cs` in the **Plugins/ConvertCurrency** folder
+1. Create a new file named **CurrencyConverter.cs** in the **Plugins/ConvertCurrency** folder
 
-1. In the `CurrencyConverter.cs` file, add the following code to create a plugin function:
+1. In the **CurrencyConverter.cs** file, add the following code to create a plugin function:
 
     ```c#
     using AITravelAgent;
@@ -122,9 +129,9 @@ In this task, you create a native function that can convert an amount from a bas
     }
     ```
 
-    In this code, you use the `KernelFunction` decorator to declare your native function. You also use the `Description` decorator to add a description of what the function does. You can use `Currency.Currencies` to get a dictionary of currencies and their exchange rates. Next, add some logic to convert a given amount from one currency to another.
+    In this code, you use the **KernelFunction** decorator to declare your native function. You also use the **Description** decorator to add a description of what the function does. You can use **Currency.Currencies** to get a dictionary of currencies and their exchange rates. Next, add some logic to convert a given amount from one currency to another.
 
-1. Modify your `ConvertAmount` function with the following code:
+1. Modify your **ConvertAmount** function with the following code:
 
     ```c#
     [KernelFunction, Description("Convert an amount from one currency to another")]
@@ -156,9 +163,9 @@ In this task, you create a native function that can convert an amount from a bas
     }
     ```
 
-    In this code, you use the `Currency.Currencies` dictionary to get the `Currency` object for the target and base currencies. You then use the `Currency` object to convert the amount from the base currency to the target currency. Finally, you return a string with the converted amount. Next, let's test your plugin.
+    In this code, you use the **Currency.Currencies** dictionary to get the **Currency** object for the target and base currencies. You then use the **Currency** object to convert the amount from the base currency to the target currency. Finally, you return a string with the converted amount. Next, let's test your plugin.
 
-1. In the `Program.cs` file, import and invoke your new plugin function with the following code:
+1. In the **Program.cs** file, import and invoke your new plugin function with the following code:
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
@@ -177,7 +184,7 @@ In this task, you create a native function that can convert an amount from a bas
     Console.WriteLine(result);
     ```
 
-    In this code, you use the `ImportPluginFromType` method to import your plugin. Then you use the `InvokeAsync` method to invoke your plugin function. The `InvokeAsync` method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
+    In this code, you use the **ImportPluginFromType** method to import your plugin. Then you use the **InvokeAsync** method to invoke your plugin function. The **InvokeAsync** method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
 
 1. In the terminal, enter `dotnet run`. You should see the following output:
 
@@ -191,11 +198,11 @@ In this task, you create a native function that can convert an amount from a bas
 
 In this task, you create a prompt that parses the user's input to identify the target currency, base currency, and amount to convert.
 
-1. Create a new folder named `GetTargetCurrencies` in the **Prompts** folder
+1. Create a new folder named **GetTargetCurrencies** in the **Prompts** folder
 
-1. In the `GetTargetCurrencies` folder, create a new file named `config.json`
+1. In the **GetTargetCurrencies** folder, create a new file named **config.json**
 
-1. Enter the following text into the `config.json` file:
+1. Enter the following text into the **config.json** file:
 
     ```output
     {
@@ -218,9 +225,9 @@ In this task, you create a prompt that parses the user's input to identify the t
     }
     ```
 
-1. In the `GetTargetCurrencies` folder, create a new file named `skprompt.txt`
+1. In the **GetTargetCurrencies** folder, create a new file named **skprompt.txt**
 
-1. Enter the following text into the `skprompt.txt` file:
+1. Enter the following text into the **skprompt.txt** file:
 
     ```html
     <message role="system">Identify the target currency, base currency, and 
@@ -245,7 +252,7 @@ In this task, you create a prompt that parses the user's input to identify the t
 
 In this task, you run your application and verify your code is working correctly. 
 
-1. Test your new prompt by updating your `Program.cs` file with the following code:
+1. Test your new prompt by updating your **Program.cs** file with the following code:
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
@@ -268,9 +275,9 @@ In this task, you run your application and verify your code is working correctly
     ```
 
     > [!NOTE]
-    > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder. You may need to adjust the prompt in the `skprompt.txt` file to produce more exact results.
+    > If your code doesn't produce the output you expected, you can review the code in the **Solution** folder. You may need to adjust the prompt in the **skprompt.txt** file to produce more exact results.
 
-Now you have a plugin that can convert an amount from one currency to another, and a prompt that can be used to parse the user's input into a format the `ConvertAmount` function can use. This will allow users to easily convert currency amounts using your AI travel agent.
+Now you have a plugin that can convert an amount from one currency to another, and a prompt that can be used to parse the user's input into a format the **ConvertAmount** function can use. This will allow users to easily convert currency amounts using your AI travel agent.
 
 ## Exercise 2: Automate plugin selection based on user intent
 
@@ -280,7 +287,7 @@ In this exercise, you detect the user's intent and route the conversation to the
 
 ### Task 1: Use the GetIntent plugin
 
-1. Update your `Program.cs` file with the following code:
+1. Update your **Program.cs** file with the following code:
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
@@ -297,7 +304,7 @@ In this exercise, you detect the user's intent and route the conversation to the
 
     ```
 
-    In this code, you use the `GetIntent` prompt to detect the user's intent. You then store the intent in a variable called `intent`. Next, you route the intent to your `CurrencyConverter` plugin.
+    In this code, you use the **GetIntent** prompt to detect the user's intent. You then store the intent in a variable called **intent**. Next, you route the intent to your **CurrencyConverter** plugin.
 
 1. Add the following code to your `Program.cs` file:
 
@@ -325,13 +332,13 @@ In this exercise, you detect the user's intent and route the conversation to the
     }
     ```
 
-    The `GetIntent` plugin returns the following values: ConvertCurrency, SuggestDestinations, SuggestActivities, Translate, HelpfulPhrases, Unknown. You use a `switch` statement to route the user's intent to the appropriate plugin. 
+    The **GetIntent** plugin returns the following values: ConvertCurrency, SuggestDestinations, SuggestActivities, Translate, HelpfulPhrases, Unknown. You use a **switch** statement to route the user's intent to the appropriate plugin. 
     
-    If the user's intent is to convert currency, you use the `GetTargetCurrencies` prompt to retrieve the currency information. Then you use the `CurrencyConverter` plugin to convert the amount.
+    If the user's intent is to convert currency, you use the **GetTargetCurrencies** prompt to retrieve the currency information. Then you use the **CurrencyConverter** plugin to convert the amount.
 
     Next, you add some cases to handle the other intents. For now, let's use the automatic function calling capability of the Semantic Kernel SDK to route the intent to the available plugins.
 
-1. Create the automatic function calling setting by adding the following code to your `Program.cs` file:
+1. Create the automatic function calling setting by adding the following code to your **Program.cs** file:
 
     ```c#
     kernel.ImportPluginFromType<CurrencyConverter>();
@@ -353,7 +360,7 @@ In this exercise, you detect the user's intent and route the conversation to the
 
     Next, you add cases to the switch statement for the other intents.
 
-1. Update your `Program.cs` file with the following code:
+1. Update your **Program.cs** file with the following code:
 
     ```c#
     switch (intent) {
@@ -373,9 +380,9 @@ In this exercise, you detect the user's intent and route the conversation to the
     }
     ```
 
-    In this code, you use the `AutoInvokeKernelFunctions` setting to automatically call functions and prompts that are referenced in your kernel. If the user's intent is to convert currency, the `CurrencyConverter` plugin performs its task. 
+    In this code, you use the **AutoInvokeKernelFunctions** setting to automatically call functions and prompts that are referenced in your kernel. If the user's intent is to convert currency, the **CurrencyConverter** plugin performs its task. 
     
-    If the user's intent is to get destination or activity suggestions, translate a phrase, or get helpful phrases in a language, the `AutoInvokeKernelFunctions` setting automatically calls the existing plugins that were included in the project code.
+    If the user's intent is to get destination or activity suggestions, translate a phrase, or get helpful phrases in a language, the **AutoInvokeKernelFunctions** setting automatically calls the existing plugins that were included in the project code.
 
     You can also add code to run the user's input as a prompt to the large language model (LLM) if it doesn't fall under any of these intent cases.
 
@@ -455,7 +462,7 @@ Next, let's modify the routing logic to provide some conversation history to cer
 
 In this exercise, you use the conversation history to provide context to the large language model (LLM). You also adjust the code so that it allows the user to continue the conversation, just like a real chatbot. Let's get started!
 
-1. Modify the code to use a `do`-`while` loop to accept the user's input:
+1. Modify the code to use a do-while loop to accept the user's input:
 
     ```c#
     string input;
@@ -472,7 +479,7 @@ In this exercise, you use the conversation history to provide context to the lar
 
     Now you can keep the conversation going until the user enters a blank line.
 
-1. Capture details about the user's trip by modifying the `SuggestDestinations` case:
+1. Capture details about the user's trip by modifying the **SuggestDestinations** case:
 
     ```c#
     case "SuggestDestinations":
@@ -482,7 +489,7 @@ In this exercise, you use the conversation history to provide context to the lar
         break;
     ```
 
-1. Use the trip details in the `SuggestActivities` case with the following code:
+1. Use the trip details in the **SuggestActivities** case with the following code:
 
     ```c#
      case "SuggestActivities":
@@ -493,9 +500,9 @@ In this exercise, you use the conversation history to provide context to the lar
         break;
     ```
 
-    In this code, you use the built-in `SummarizeConversation` function to summarize the chat with the user. Next, let's use the summary to suggest activities at the destination.
+    In this code, you use the built-in **SummarizeConversation** function to summarize the chat with the user. Next, let's use the summary to suggest activities at the destination.
 
-1. Extend the `SuggestActivities` case with the following code:
+1. Extend the **SuggestActivities** case with the following code:
 
     ```c#
     var activities = await kernel.InvokePromptAsync(
@@ -513,11 +520,11 @@ In this exercise, you use the conversation history to provide context to the lar
     break;
     ```
 
-    In this code, you add `input` and `chatSummary` as kernel arguments. Then the kernel invokes the prompt and routes it to the `SuggestActivities` plugin. You also append the user's input and the assistant's response to the chat history and display the results. Next, you need to add the `chatSummary` variable to the `SuggestActivities` plugin.
+    In this code, you add **input** and **chatSummary** as kernel arguments. Then the kernel invokes the prompt and routes it to the **SuggestActivities** plugin. You also append the user's input and the assistant's response to the chat history and display the results. Next, you need to add the **chatSummary** variable to the **SuggestActivities** plugin.
 
 1. Navigate to **Prompts/SuggestActivities/config.json** and open the file in Visual Studio Code
 
-1. Under `input_variables`, add a variable for the chat history:
+1. Under **input_variables**, add a variable for the chat history:
 
     ```json
     "input_variables": [
