@@ -233,6 +233,9 @@ In this task, you create a plugin that allows you to add songs to the user's rec
 
     If you open up 'Files/RecentlyPlayed.txt,' you should see the new song added to the list.
 
+> [!NOTE]
+> If the terminal displays warnings for null values, you may ignore them as they will not affect the result.
+
 ### Task 2: Provide personalized song recommendations
 
 In this task, you create a prompt that provides personalized song recommendations to the user based on their recently played songs. The prompt combines the native functions to generate a song recommendation. You also create a function from the prompt to make it reusable.
