@@ -145,7 +145,7 @@ In this task, you create a plugin that allows you to add songs to the user's rec
 
 1. Create a new folder in the 'Lab01-Project' directory and name it 'Plugins.'
 
-1. In the 'Plugins' folder, create a new file 'MusicLibrary.cs'
+1. In the 'Plugins' folder, create a new file 'MusicLibraryPlugin.cs'
 
     First, create some quick functions to get and add songs to the user's "Recently Played" list.
 
