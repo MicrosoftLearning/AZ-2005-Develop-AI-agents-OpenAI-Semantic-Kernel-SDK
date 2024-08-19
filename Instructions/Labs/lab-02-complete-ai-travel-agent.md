@@ -186,6 +186,8 @@ In this task, you create a native function that can convert an amount from a bas
 
     In this code, you use the **ImportPluginFromType** method to import your plugin. Then you use the **InvokeAsync** method to invoke your plugin function. The **InvokeAsync** method takes the plugin name, function name, and a dictionary of parameters. Finally, you print the result to the console. Next, run the code to make sure it's working.
 
+1. Open the terminal by selecting Terminal > New Terminal.
+
 1. In the terminal, enter `dotnet run`. You should see the following output:
 
     ```output
