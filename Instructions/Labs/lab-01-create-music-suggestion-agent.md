@@ -120,6 +120,9 @@ In this exercise, you learn how to build your first Semantic Kernel SDK project.
     ```
 
     Be sure to replace the placeholders with the values from your Azure resource.
+    
+    > [!NOTE]
+    > You can retrieve the values of `your-endpoint` and `your-api-key` from the page **Keys and Endpoint** in the Azure portal, while `your-deployment-name` is the name of your deployment. Finally, if you followed the instructions in the model deployment task, the value of the placeholder called `deployment-model` should be `gpt-35-turbo-16k`.
 
 1. To verify that your kernel and endpoint is working, enter the following code:
 
@@ -143,7 +146,7 @@ In this exercise, you create custom plugins for your music library. You create f
 
 In this task, you create a plugin that allows you to add songs to the user's recently played list and get the list of recently played songs. For simplicity, the recently played songs are stored in a text file.
 
-1. Create a new folder in the 'Lab01-Project' directory and name it 'Plugins.'
+1. Create a new folder in the 'Lab01-Project' directory (where the `.csproj` project file is located) and name it 'Plugins.'
 
 1. In the 'Plugins' folder, create a new file 'MusicLibraryPlugin.cs'
 
