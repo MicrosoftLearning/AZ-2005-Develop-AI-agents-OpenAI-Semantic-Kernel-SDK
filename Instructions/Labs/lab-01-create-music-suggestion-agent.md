@@ -146,7 +146,7 @@ In this exercise, you create custom plugins for your music library. You create f
 
 In this task, you create a plugin that allows you to add songs to the user's recently played list and get the list of recently played songs. For simplicity, the recently played songs are stored in a text file.
 
-1. Create a new folder in the 'Lab01-Project' directory and name it 'Plugins.'
+1. Create a new folder in the 'Lab01-Project' directory (where the `.csproj` project file is located) and name it 'Plugins.'
 
 1. In the 'Plugins' folder, create a new file 'MusicLibraryPlugin.cs'
 
