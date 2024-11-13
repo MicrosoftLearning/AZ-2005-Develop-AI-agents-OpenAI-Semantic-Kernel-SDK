@@ -79,15 +79,11 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 :::image type="content" source="../media/model-deployments.png" alt-text="A screenshot of the Azure OpenAI deployments page.":::
 
-1. Select **Create New Deployment** then **Deploy Model**.
+1.Go to **Model Catalog**, select **gpt-35-turbo-16k** and **Deploy**. 
 
-1. Under **Select a model**, select **gpt-35-turbo-16k**.
+1. Enter a name for your deployment and leave default options. Click **Deploy**.
 
-    Use the default Model version
-
-1. Enter a name for your deployment
-
-1. When the deployment completes, navigate back to your Azure OpenAI resource.
+1. When the deployment completes, navigate back to your Azure OpenAI resource in the Azure Portal.
 
 1. Under **Resource Management**, go to **Keys and Endpoint**.
 
@@ -114,8 +110,7 @@ In this exercise, you learn how to build your first Semantic Kernel SDK project.
     builder.AddAzureOpenAIChatCompletion(
         "your-deployment-name",
         "your-endpoint",
-        "your-api-key",
-        "deployment-model");
+        "your-api-key");
     var kernel = builder.Build();
     ```
 
@@ -143,7 +138,7 @@ In this exercise, you create custom plugins for your music library. You create f
 
 In this task, you create a plugin that allows you to add songs to the user's recently played list and get the list of recently played songs. For simplicity, the recently played songs are stored in a text file.
 
-1. Create a new folder in the 'Lab01-Project' directory and name it 'Plugins.'
+1. Create a new folder in the 'Starter' directory and name it 'Plugins.'
 
 1. In the 'Plugins' folder, create a new file 'MusicLibraryPlugin.cs'
 
@@ -202,10 +197,10 @@ In this task, you create a plugin that allows you to add songs to the user's rec
 
     In this code, you create a function accepts the artist, song, and genre as strings. In addition to the `Description` of the function, you also add descriptions of the input variables. The 'RecentlyPlayed.txt' file contains json formatted list of songs that the user has recently played. This code reads the existing content from the file, parses it, and adds the new song to the list. Afterwards, the updated list is written back to the file.
 
-1. Update your **Program.cs** file with the following code:
+1. Update your **Program.cs** file with the following code under **var kernel = builder.Build();**:
 
     ```c#
-    var kernel = builder.Build();
+    
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
 
     var result = await kernel.InvokeAsync(
@@ -222,7 +217,14 @@ In this task, you create a plugin that allows you to add songs to the user's rec
     ```
 
     In this code, you import the MusicLibraryPlugin to the kernel using ImportPluginFromType. Then you call InvokeAsync with the plugin name and function name that you want to call. You also pass in the artist, song, and genre as arguments.
-
+1. Remove the following lines from Exercise 1:
+  
+    ```c#
+      var result = await kernel.InvokePromptAsync(
+          "Who are the top 5 most famous musicians in the world?");
+    Console.WriteLine(result);
+    ```
+   
 1. Run the code by entering `dotnet run` in the terminal.
 
     You should see the following output:
@@ -254,10 +256,10 @@ In this task, you create a prompt that provides personalized song recommendation
 
     This function reads the list of available music from a file named 'MusicLibrary.txt'. The file contains a json formatted list of songs available to the user.
 
-1. Update your **Program.cs** file with the following code:
+1. Replace your **Program.cs** file with the following code under **var kernel = builder.Build();**:
 
     ```c#
-    var kernel = builder.Build();
+    
     kernel.ImportPluginFromType<MusicLibraryPlugin>();
     
     string prompt = @"This is a list of music available to the user:
@@ -285,7 +287,7 @@ In this code, you combine your native functions with a semantic prompt. The nati
 
     >[!NOTE] The recommended song may be different than the one shown here.
 
-1. Modify the code to create a function from the prompt:
+1. Replace  the code under **kernel.ImportPluginFromType<MusicLibraryPlugin>();**  to create a function from the prompt:
 
     ```c#
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
@@ -307,7 +309,14 @@ In this code, you combine your native functions with a semantic prompt. The nati
     Console.WriteLine(result);
     ```
 
-    In this code, you create a function from a prompt that suggests a song to the user. Then you add it to the kernel Plugins. Finally, you tell the kernel to run the function.
+    1. To test your code, enter `dotnet run` in the terminal.
+
+    You should see a response similar to the following output:
+
+    ```output 
+    Based on their recently played music, I would suggest the song "Sofia" by Gaby from the list to play next.
+    ```
+In this code, you create a function from a prompt that suggests a song to the user. Then you add it to the kernel Plugins. Finally, you tell the kernel to run the function.
 
 ### Task 3: Provide personalized concert recommendations
 
@@ -384,7 +393,13 @@ In this task, you create a plugin that retrieves upcoming concert details. You a
     var prompts = kernel.ImportPluginFromPromptDirectory("Prompts");
 
     var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
-    // code omitted for brevity
+      promptTemplate: @"This is a list of music available to the user:
+      {{MusicLibraryPlugin.GetMusicLibrary}}
+      This is a list of music the user has recently played:
+      {{MusicLibraryPlugin.GetRecentPlays}}
+      Based on their recently played music, suggest a song from    the list to play next",
+      functionName: "SuggestSong",
+      description: "Suggest a song to the user"
     );
 
     kernel.Plugins.AddFromFunctions("SuggestSongPlugin", [songSuggesterFunction]);
@@ -418,7 +433,7 @@ You can avoid manually invoking the plugin functions by using automatic function
 
 In this task, you enable automatic function calling to generate suggestions based on the user's input.
 
-1. In your **Program.cs** file, update your code to the following:
+1. In your **Program.cs** file, update your code to the following (keep **AddAzureOpenAIChatCompletion** settings values):
 
     ```c#
     using Microsoft.SemanticKernel;
@@ -439,7 +454,8 @@ In this task, you enable automatic function calling to generate suggestions base
     {
         ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
     };
-    
+
+    string location = "Redmond WA USA";
     string prompt = @$"Based on the user's recently played music, suggest a 
         concert for the user living in ${location}";
 
