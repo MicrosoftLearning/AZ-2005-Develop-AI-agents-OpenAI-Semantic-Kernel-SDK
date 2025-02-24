@@ -76,8 +76,6 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 1. On the **Overview** page, select **Go to Azure Foundry portal**.
 
-:::image type="content" source="../media/model-deployments.png" alt-text="A screenshot of the Azure OpenAI deployments page.":::
-
 1. Select **Create New Deployment** then **from base models**.
 
 1. On the models list, select **gpt-35-turbo-16k**.
