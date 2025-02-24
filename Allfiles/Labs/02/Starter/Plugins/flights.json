@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "Airline": "Air Japan",
+    "Destination": "Tokyo",
+    "DepartureDate": "2025-01-19",
+    "Price": 1200,
+    "IsBooked": false
+  },
+  {
+    "Id": 2,
+    "Airline": "Pacific Airlines",
+    "Destination": "Tokyo",
+    "DepartureDate": "2025-01-25",
+    "Price": 1100,
+    "IsBooked": false
+  },
+  {
+    "Id": 3,
+    "Airline": "Skyward Express",
+    "Destination": "Tokyo",
+    "DepartureDate": "2025-01-20",
+    "Price": 1150,
+    "IsBooked": false
+  },
+  {
+    "Id": 4,
+    "Airline": "EuroJet",
+    "Destination": "Barcelona",
+    "DepartureDate": "2025-02-10",
+    "Price": 950,
+    "IsBooked": true
+  },
+  {
+    "Id": 5,
+    "Airline": "Skyline Airways",
+    "Destination": "Paris",
+    "DepartureDate": "2025-02-04",
+    "Price": 1050,
+    "IsBooked": false
+  },
+  {
+    "Id": 6,
+    "Airline": "Lufthansa",
+    "Destination": "Berlin",
+    "DepartureDate": "2025-02-04",
+    "Price": 980,
+    "IsBooked": false
+  },
+  {
+    "Id": 7,
+    "Airline": "Air Italia",
+    "Destination": "Rome",
+    "DepartureDate": "2025-02-15",
+    "Price": 1020,
+    "IsBooked": false
+  },
+  {
+    "Id": 8,
+    "Airline": "Swiss Air",
+    "Destination": "Zurich",
+    "DepartureDate": "2025-02-10",
+    "Price": 990,
+    "IsBooked": false
+  },
+  {
+    "Id": 9,
+    "Airline": "Dragon Air",
+    "Destination": "Hong Kong",
+    "DepartureDate": "2025-02-18",
+    "Price": 1250,
+    "IsBooked": false
+  },
+  {
+    "Id": 10,
+    "Airline": "Cathay Pacific",
+    "Destination": "Hong Kong",
+    "DepartureDate": "2025-02-08",
+    "Price": 1280,
+    "IsBooked": false
+  }
+]

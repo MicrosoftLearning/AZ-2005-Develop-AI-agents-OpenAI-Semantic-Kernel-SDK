@@ -1,5 +1,0 @@
-﻿Translate the following sentence to {{$language}}: {{$input}}
-
-Display the output in the following format:
-Here's how to say "{{$input}}"
-In {{$language}}: 
