@@ -29,7 +29,7 @@
     "Destination": "Barcelona",
     "DepartureDate": "2025-02-10",
     "Price": 950,
-    "IsBooked": true
+    "IsBooked": false
   },
   {
     "Id": 5,
