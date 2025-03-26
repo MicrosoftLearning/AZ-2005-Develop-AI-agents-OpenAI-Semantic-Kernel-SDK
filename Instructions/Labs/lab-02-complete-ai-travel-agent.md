@@ -4,14 +4,14 @@ lab:
   module: "Module 01: Build your kernel"
 ---
 
-# Lab: Complete an AI travel agent
+# Lab: Complete an AI travel assistant
 # Student lab manual
 
-In this lab, you will complete an AI travel agent using the Semantic Kernel SDK. You will create an endpoint for the large language model (LLM) service, create Semantic Kernel functions, and use the automatic function calling capability of the Semantic Kernel SDK to route the user's intent to the appropriate plugins, including some prebuilt plugins that have been provided. You will also provide context to the LLM by using conversation history and allow the user to continue the conversation.
+In this lab, you will complete an AI travel assistant using the Semantic Kernel SDK. You will create an endpoint for the large language model (LLM) service, create Semantic Kernel functions, and use the automatic function calling capability of the Semantic Kernel SDK to route the user's intent to the appropriate plugins, including some prebuilt plugins that have been provided. You will also provide context to the LLM by using conversation history and allow the user to continue the conversation.
 
 ## Lab Scenario
 
-You are a developer at a travel agency that specializes in creating personalized travel experiences for your customers. You have been tasked with creating an AI travel agent that can help customers learn more about travel destinations and plan activities for their trips. The AI travel agent should be able to convert currency amounts, suggest destinations and activities, provide helpful phrases in different languages, and translate phrases. The AI travel agent should also be able to provide contextually relevant responses to the user's requests by using conversation history.
+You are a developer at a travel agency that specializes in creating personalized travel experiences for your customers. You have been tasked with creating an AI travel assistant that can help customers learn more about travel destinations and plan activities for their trips. The AI travel assistant should be able to convert currency amounts, suggest destinations and activities, provide helpful phrases in different languages, and translate phrases. The AI travel assistant should also be able to provide contextually relevant responses to the user's requests by using conversation history.
 
 ## Objectives
 
@@ -92,7 +92,7 @@ For this exercise, you create an endpoint for the large language model (LLM) ser
 
 ### Task 2: Create a native plugin
 
-In this task, you create a native function plugin that can convert an amount from a base currency currency to a target currency.
+In this task, you create a native function plugin that can convert an amount from a base currency to a target currency.
 
 1. Return to your Visual Studio Code project.
 
@@ -106,29 +106,30 @@ In this task, you create a native function plugin that can convert an amount fro
     }
     ```
 
-1. Navigate to the file named **CurrencyConverter.cs** in the **Plugins/ConvertCurrency** folder
+1. Navigate to the file named **CurrencyConverterPlugin.cs** in the **Plugins** folder
 
-1. In the **CurrencyConverter.cs** file, add the following code to create a plugin function:
+1. In the **CurrencyConverterPlugin.cs** file, add the following code under the comment **Create a kernel function that gets the exchange rate**:
 
     ```c#
-    class CurrencyConverter
+    // Create a kernel function that gets the exchange rate
+    [KernelFunction("convert_currency")]
+    [Description("Converts an amount from one currency to another, for example USD to EUR")]
+    public static decimal ConvertCurrency(decimal amount, string fromCurrency, string toCurrency)
     {
-        [KernelFunction("convert_currency")]
-        [Description("Converts an amount from one currency to another, for example USD to EUR")]
-        public static decimal ConvertCurrency(decimal amount, string fromCurrency, string toCurrency)
-        {
-            decimal exchangeRate = GetExchangeRate(fromCurrency, toCurrency);
-            return amount * exchangeRate;
-        }
+        decimal exchangeRate = GetExchangeRate(fromCurrency, toCurrency);
+        return amount * exchangeRate;
     }
     ```
 
     In this code, you use the **KernelFunction** decorator to declare your native function. You also use the **Description** decorator to add a description of what the function does. Next, you add some logic to convert a given amount from one currency to another.
 
-1. In the **Program.cs** file, import new plugin with the following code:
+1. Open the **Program.cs** file
+
+1. Import the currency converter plugin under the comment **Add plugins to the kernel**:
 
     ```c#
-    kernel.ImportPluginFromType<CurrencyConverter>();
+    // Add plugins to the kernel
+    kernel.ImportPluginFromType<CurrencyConverterPlugin>();
     ```
 
     Next, let's test your plugin.
@@ -147,7 +148,7 @@ In this task, you create a native function plugin that can convert an amount fro
 
 ## Exercise 2: Create a Handlebars prompt
 
-In this exercise, you'll create a function from a Handlebars prompt. The function will prompt the LLM to create a travel itenerary for the user. Let's get started!
+In this exercise, you'll create a function from a Handlebars prompt. The function will prompt the LLM to create a travel itinerary for the user. Let's get started!
 
 **Estimated exercise completion time**: 10 minutes
 
@@ -157,23 +158,22 @@ In this exercise, you'll create a function from a Handlebars prompt. The functio
 
     `using Microsoft.SemanticKernel.PromptTemplates.Handlebars;`
 
-1. Update your **Program.cs** file with the following code:
+1. Add the following code under the comment **Create a handlebars prompt**:
 
     ```c#
-    kernel.ImportPluginFromType<CurrencyConverterPlugin>();
-
+    // Create a handlebars prompt
     string hbprompt = """
-        <message role="system">Instructions: Before providing the the user with a travel itenerary, ask how many days their trip is</message>
-        <message role="user">I'm going to {{city}}. Can you create an itenerary for me?</message>
+        <message role="system">Instructions: Before providing the user with a travel itinerary, ask how many days their trip is</message>
+        <message role="user">I'm going to {{city}}. Can you create an itinerary for me?</message>
         <message role="assistant">Sure, how many days is your trip?</message>
         <message role="user">{{input}}</message>
         <message role="assistant">
         """;
     ```
 
-    In this code, you create a few-shot prompt using the Handlebars template format. The prompt will guide the model to retrieve more information from the user before creating a travel itenerary.
+    In this code, you create a few-shot prompt using the Handlebars template format. The prompt will guide the model to retrieve more information from the user before creating a travel itinerary.
 
-1. Add the following code to your **Program.cs** file:
+1. Add the following code under the comment **Create the prompt template config using handlebars format**:
 
     ```c#
     // Create the prompt template config using handlebars format
@@ -182,26 +182,30 @@ In this exercise, you'll create a function from a Handlebars prompt. The functio
     {
         Template = hbprompt,
         TemplateFormat = "handlebars",
-        Name = "GetItenerary",
+        Name = "GetItinerary",
     };
-
-    // Create a plugin from the prompt
-    var promptFunction = kernel.CreateFunctionFromPrompt(promptTemplateConfig, templateFactory);
-    var iteneraryPlugin = kernel.CreatePluginFromFunctions("TravelItenerary", [promptFunction]);
-
-    // Add the new plugin to the kernel
-    kernel.Plugins.Add(iteneraryPlugin);
     ```
 
-    In this code, you create a Handlebars template configuration from the prompt. Then you create a plugin function for the prompt and add it to the kernel. Now you're ready to invoke your function.
+    This code creates a Handlebars template configuration from the prompt. You can use it to create a plugin function.
+
+1. Add the following code under the comment **Create a plugin function from the prompt**: 
+
+    ```c#
+    // Create a plugin function from the prompt
+    var promptFunction = kernel.CreateFunctionFromPrompt(promptTemplateConfig, templateFactory);
+    var itineraryPlugin = kernel.CreatePluginFromFunctions("TravelItinerary", [promptFunction]);
+    kernel.Plugins.Add(itineraryPlugin);
+    ```
+
+    This code creates a plugin function for the prompt and adds it to the kernel. Now you're ready to invoke your function.
 
 1. Enter `dotnet run` in the terminal to run the code.
 
-    Try the following input to prompt the LLM for an itenerary.
+    Try the following input to prompt the LLM for an itinerary.
 
     ```output
     Assistant: How may I help you?
-    User: I'm going to Hong Kong, can you create an itenerary for me?
+    User: I'm going to Hong Kong, can you create an itinerary for me?
     Assistant: Sure! How many days will you be staying in Hong Kong?
     User: 10
     Assistant: Great! Here's a 10-day itinerary for your trip to Hong Kong:
@@ -210,20 +214,20 @@ In this exercise, you'll create a function from a Handlebars prompt. The functio
 
     Now you have the beginnings of an AI travel assistant. Let's use prompts and plugins to add more features
 
-1.  Add the following code to your **Program.cs** file:
+1.  Add the flight booking plugin under the comment **Add plugins to the kernel**:
 
     ```c#
+    // Add plugins to the kernel
     kernel.ImportPluginFromType<CurrencyConverterPlugin>();
     kernel.ImportPluginFromType<FlightBookingPlugin>();
     ```
 
     This plugin simulates flight bookings using the **flights.json** file with mock details. Next, add some additional system prompts to the assistant.
 
-1.  Add the following code to your **Program.cs** file:
+1.  Add the following code under the comment **Add system messages to the chat**:
 
     ```c#
-    // Setup the assistant chat
-    var history = new ChatHistory();
+    // Add system messages to the chat
     history.AddSystemMessage("The current date is 01/10/2025");
     history.AddSystemMessage("You are a helpful travel assistant.");
     history.AddSystemMessage("Before providing destination recommendations, ask the user about their budget.");
@@ -237,7 +241,7 @@ In this exercise, you'll create a function from a Handlebars prompt. The functio
 
     ```output
     1. Can you give me some destination recommendations for Europe?
-    2. I want to go to Barcelona, can you create an itenerary for me?
+    2. I want to go to Barcelona, can you create an itinerary for me?
     3. How many Euros is 100 USD?
     4. Can you book me a flight to Barcelona?
     ```
@@ -246,7 +250,7 @@ In this exercise, you'll create a function from a Handlebars prompt. The functio
 
 ## Exercise 3: Require user consent for actions
 
-In this exercise, you add a filter invocation function that will request the user's approval before allowing the agent to book a flight on their behalf. Let's get started!
+In this exercise, you add a filter invocation function that will request the user's approval before allowing the assistant to book a flight on their behalf. Let's get started!
 
 ### Task 1: Create a function invocation filter
 
@@ -262,7 +266,9 @@ In this exercise, you add a filter invocation function that will request the use
     {
         public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
         {
+            // Check the plugin and function names
             
+            await next(context);
         }
     }
     ```
@@ -270,17 +276,18 @@ In this exercise, you add a filter invocation function that will request the use
     >[!NOTE] 
     > In version 1.30.0 of the Semantic Kernel SDK, function filters are subject to change and require a warning suppression. 
 
-    In this code, you implement the `IFunctionInvocationFilter` interface. The `OnFunctionInvocationAsync` method is always called whenever a function is invoked from an AI agent.
+    In this code, you implement the `IFunctionInvocationFilter` interface. The `OnFunctionInvocationAsync` method is always called whenever a function is invoked from an AI assistant.
 
 1. Add the following code to detect when the `book_flight` function is invoked:
 
     ```c#
-    if ((context.Function.PluginName == "FlightBooking" && context.Function.Name == "book_flight"))
+    // Check the plugin and function names
+    if ((context.Function.PluginName == "FlightBookingPlugin" && context.Function.Name == "book_flight"))
     {
-    
-    }
+        // Request user approval
 
-    await next(context);
+        // Proceed if approved
+    }
     ```
 
     This code uses the `FunctionInvocationContext` to determine which plugin and function were invoked.
@@ -288,29 +295,25 @@ In this exercise, you add a filter invocation function that will request the use
 1. Add the following logic to request the user's permission to book the flight:
 
     ```c#
-    if ((context.Function.PluginName == "FlightBooking" && context.Function.Name == "book_flight"))
+    // Request user approval
+    Console.WriteLine("System Message: The assistant requires an approval to complete this operation. Do you approve (Y/N)");
+    Console.Write("User: ");
+    string shouldProceed = Console.ReadLine()!;
+
+    // Proceed if approved
+    if (shouldProceed != "Y")
     {
-        Console.WriteLine("System Message: The agent requires an approval to complete this operation. Do you approve (Y/N)");
-        Console.Write("User: ");
-        string shouldProceed = Console.ReadLine()!;
-
-        if (shouldProceed != "Y")
-        {
-            context.Result = new FunctionResult(context.Result, "The operation was not approved by the user");
-            return;
-        }
+        context.Result = new FunctionResult(context.Result, "The operation was not approved by the user");
+        return;
     }
-
-    await next(context);
     ```
 
 1. Navigate to the **Program.cs** file.
 
-1. Add the permission filter to your kernel using the following code:
+1. Add the following code under the comment **Add filters to the kernel**:
 
     ```c#
-    kernel.ImportPluginFromType<CurrencyConverterPlugin>();
-    kernel.ImportPluginFromType<FlightBookingPlugin>();
+    // Add filters to the kernel
     kernel.FunctionInvocationFilters.Add(new PermissionFilter());
     ```
 
@@ -322,13 +325,13 @@ In this exercise, you add a filter invocation function that will request the use
     User: Find me a flight to Tokyo on the 19
     Assistant: I found a flight to Tokyo on the 19th of January. The flight is with Air Japan and the price is $1200.
     User: Y
-    System Message: The agent requires an approval to complete this operation. Do you approve (Y/N)
+    System Message: The assistant requires an approval to complete this operation. Do you approve (Y/N)
     User: N
     Assistant: I'm sorry, but I am unable to book the flight for you.
     ```
 
-    The agent should require user approval before proceeding with any bookings.
+    The assistant should require user approval before proceeding with any bookings.
 
 ### Review
 
-In this lab, you created an endpoint for the large language model (LLM) service, built a Semantic Kernel object, and ran prompts using the Semantic Kernel SDK. You also created plugins and leveraged system messages to guied the model. Congratulations on completing this lab!
+In this lab, you created an endpoint for the large language model (LLM) service, built a Semantic Kernel object, and ran prompts using the Semantic Kernel SDK. You also created plugins and leveraged system messages to guide the model. Congratulations on completing this lab!

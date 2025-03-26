@@ -3,7 +3,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
-string filePath = Path.GetFullPath("../../appsettings.json");
+string filePath = Path.GetFullPath("appsettings.json");
 var config = new ConfigurationBuilder()
 .AddJsonFile(filePath)
 .Build();
@@ -18,14 +18,26 @@ var builder = Kernel.CreateBuilder();
 builder.AddAzureOpenAIChatCompletion(modelId, endpoint, apiKey);
 Kernel kernel = builder.Build();
 
+// Add plugins to the kernel
+
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new() 
 {
     FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(),
 };
 
+// Create a handlebars prompt
+
+// Create the prompt template config using handlebars format
+
+// Create a plugin function from the prompt
+
+// Add filters to the kernel
+
 // Setup the assistant chat
 var history = new ChatHistory();
+
+// Add system messages to the chat
 
 Console.WriteLine("Press enter to exit");
 Console.WriteLine("Assistant: How may I help you?");

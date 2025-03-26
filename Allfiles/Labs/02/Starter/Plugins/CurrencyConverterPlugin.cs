@@ -16,6 +16,7 @@ class CurrencyConverterPlugin
         { "HKD-USD", 1 / 7.77m }
     };
 
+    // Get the exchange rate from one currency to another
     public static decimal GetExchangeRate(string fromCurrency, string toCurrency)
     {
         string key = $"{fromCurrency}-{toCurrency}";
@@ -28,4 +29,7 @@ class CurrencyConverterPlugin
             throw new Exception("Exchange rate not available for this currency pair.");
         }
     }
+
+    // Create a kernel function that gets the exchange rate
+    
 }
