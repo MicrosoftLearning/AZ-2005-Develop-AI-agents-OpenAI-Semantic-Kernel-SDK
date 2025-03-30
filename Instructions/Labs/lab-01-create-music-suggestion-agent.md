@@ -189,7 +189,7 @@ In this task, you create a plugin that allows you to add songs to the user's rec
 
 1. Navigate to the **Program.cs** file.
 
-1. Add the following code under the **Import plugins to the kernel**:
+1. Add the following code under the comment **Import plugins to the kernel**:
 
     ```c#
     // Import plugins to the kernel
