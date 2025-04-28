@@ -1,0 +1,12 @@
+[2025-04-25 09:01:32] Starting build pipeline for project: WebApp-Frontend
+[2025-04-25 09:01:34] Checking out branch: feature/login-page
+[2025-04-25 09:01:40] Installing dependencies...
+[2025-04-25 09:02:12] Dependencies installed successfully.
+[2025-04-25 09:02:14] Running unit tests...
+[2025-04-25 09:02:58] ERROR: 5 tests failed:
+    - LoginForm renders incorrectly (LoginForm.test.js:45)
+    - Validation does not trigger on empty fields (LoginForm.test.js:67)
+    - Redirect after login fails (AuthFlow.test.js:23)
+    - API call is not made on submit (LoginAPI.test.js:12)
+    - User session token is not stored (SessionManager.test.js:88)
+[2025-04-25 09:03:02] Build failed: Unit tests did not pass.

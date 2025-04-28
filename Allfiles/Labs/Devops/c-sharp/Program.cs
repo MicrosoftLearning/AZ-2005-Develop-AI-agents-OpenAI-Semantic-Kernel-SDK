@@ -70,13 +70,7 @@ async Task GetReply()
 class DevopsPlugin
 {
     // Create a kernel function to build the stage environment
-    [KernelFunction("BuildStageEnvironment")]
-    public string BuildStageEnvironment() 
-    {
-        return "Stage build completed.";
-    }
-
-    // Starter
+    
     [KernelFunction("DeployToStage")]
     public string DeployToStage()
     {
@@ -103,26 +97,3 @@ class DevopsPlugin
 }
 
 // Create a function filter
-class PermissionFilter : IFunctionInvocationFilter
-{
-    public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
-    {
-        // Check the plugin and function names
-        if (context.Function.PluginName == "DevopsPlugin" && context.Function.Name == "DeployToProd")
-        {
-            // Request user approval
-            Console.WriteLine("System Message: The assistant requires an approval to complete this operation. Do you approve (Y/N)");
-            Console.Write("User: ");
-            string shouldProceed = Console.ReadLine()!;
-
-            // Proceed if approved
-            if (shouldProceed != "Y")
-            {
-                context.Result = new FunctionResult(context.Result, "The operation was not approved by the user");
-                return;
-            }
-        }
-        
-        await next(context);
-    }
-}

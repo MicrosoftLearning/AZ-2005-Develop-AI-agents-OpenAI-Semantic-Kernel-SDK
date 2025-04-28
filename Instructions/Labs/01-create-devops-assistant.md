@@ -48,8 +48,8 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
 1. In the cloud shell pane, enter the following commands to clone the GitHub repo containing the code files for this exercise (type the command, or copy it to the clipboard and then right-click in the command line and paste as plain text):
 
     ```
-    rm -r TODO -f
-    git clone TODO
+    rm -r semantic-kernel -f
+    git clone https://github.com/MicrosoftLearning/AZ-2005-Develop-AI-agents-OpenAI-Semantic-Kernel-SDK semantic-kernel
     ```
 
     > **Tip**: As you paste commands into the cloudshell, the output may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
@@ -60,12 +60,12 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
 
     **Python**
     ```
-    cd TODO
+    cd semantic-kernel/Allfiles/Labs/Devops/python
     ```
 
     **C#**
     ```
-    cd TODO
+    cd semantic-kernel/Allfiles/Labs/Devops/c-sharp
     ```
 
 1. In the cloud shell command-line pane, enter the following command to install the libraries you'll use:
@@ -82,6 +82,7 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
     dotnet add package Microsoft.Extensions.Configuration
     dotnet add package Microsoft.Extensions.Configuration.Json
     dotnet add package Microsoft.SemanticKernel
+    dotnet add package Microsoft.SemanticKernel.PromptTemplates.Handlebars
     ```
 
 1. Enter the following command to edit the configuration file that has been provided:
@@ -279,7 +280,7 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
 1. Add the following code under the comment `Create a kernel function to deploy the staging environment`
 
      **Python**
-    ```
+    ```python
     # Create a kernel function to deploy the staging environment
     deploy_stage_function = KernelFunctionFromPrompt(
         prompt="""This is the most recent build log:
@@ -457,13 +458,15 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
     **Python**
     ```python
     async def permission_filter(context: FunctionInvocationContext, next: Callable[[FunctionInvocationContext], Awaitable[None]]) -> None:
-        # Check the plugin and function names
-        
         await next(context)
+        result = context.result
+        
+        # Check the plugin and function names
     ```
 
     **C#**
-    ```
+    ```c#
+    // Create a function filter
     class PermissionFilter : IFunctionInvocationFilter
     {
         public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
@@ -509,8 +512,10 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
 
     # Proceed if approved
     if should_proceed.upper() != "Y":
-        context.result = FunctionResult(function=context.result.function, value="The operation was not approved by the user")
-        return
+        context.result = FunctionResult(
+            function=result.function,
+            value="The operation was not approved by the user",
+        )
     ```
 
     **C#**
