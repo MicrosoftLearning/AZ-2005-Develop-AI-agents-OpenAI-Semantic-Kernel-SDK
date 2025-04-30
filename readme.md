@@ -1,27 +1,18 @@
-# INF99X: Sample Course
+# Develop Generative AI solutions using Azure OpenAI and the Semantic Kernel SDK
 
-**Are you an MCT?** - Have a look at our [GitHub User Guide for MCTs](https://microsoftlearning.github.io/MCT-User-Guide/)
+The exercises in this repo are designed to provide you with a hands-on learning experience in which you'll explore common tasks that developers perform when building generative AI solutions with Semantic Kernel and Azure OpenAI.
 
-## What are we doing?
+> **Note**: To complete the exercises, you'll need an Azure subscription in which you have sufficient permissions and quota to provision the necessary Azure resources and generative AI models. If you don't already have one, you can sign up for an [Azure account](https://azure.microsoft.com/free). There's a free trial option for new users that includes credits for the first 30 days.
 
-- To support this course, we will need to make frequent updates to the course content to keep it current with the Microsoft services used in the course. We are publishing the lab instructions and lab files on GitHub to allow for open contributions between the course authors and MCTs (Microsoft Certified Trainer) to keep the content current with product changes.
+## Exercises
 
-- We hope this brings a sense of collaboration to the labs like we have never had before - when a Microsoft service such as Azure or Microsoft 365 changes and you find it first during a live delivery, go ahead and make an enhancement right in the lab source. Help your fellow MCTs.
+- 
+- [Create a devops assistant](Instructions/Labs/01-create-devops-assistant.md)
+- [Create a music suggestion appl](Instructions/Labs/lab-01-create-music-suggestion-agent.md)
+- [Create an AI travel agent app](Instructions/Labs/lab-02-complete-ai-travel-agent.md)
 
-## How should I use this repository??
+> **Note**: While you can complete these exercises on their own, they're designed to complement modules on [Microsoft Learn](https://learn.microsoft.com/training/paths/develop-ai-agents-azure-open-ai-semantic-kernel-sdk/); in which you'll find a deeper dive into some of the underlying concepts on which these exercises are based.
 
-- The instructor materials are your primary source for teaching the course content.
+## Reporting issues
 
-- These files on GitHub are designed to be used in the course labs, which use the hosted lab environment.
-
-- It is recommended that for every delivery, trainers check GitHub for any changes that may have been made to support the latest Microsoft cloud services and get the latest files for their delivery.
-
-## What about changes to the student handbook?
-
-- We will review the student handbook on a quarterly basis and update through the normal MOC (Microsoft Official Curriculum) release channels as needed.
-
-## How do I contribute?
-
-- Any MCT (Microsoft Certified Trainer) can submit a pull request to the code or content in the GitHub repro. Microsoft and the course author will then triage and include content and lab code changes as needed.
-
-- You can submit bugs, changes, improvement, and ideas. Find a new Azure or Microsoft 365 feature before we have? Submit a new demo!
+If you encounter any problems in the exercises, please report them as **issues** in this repo.
