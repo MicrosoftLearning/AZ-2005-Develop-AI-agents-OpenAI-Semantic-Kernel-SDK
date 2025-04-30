@@ -6,7 +6,6 @@ The exercises in this repo are designed to provide you with a hands-on learning 
 
 ## Exercises
 
-- 
 - [Create a devops assistant](Instructions/Labs/01-create-devops-assistant.md)
 - [Create a music suggestion appl](Instructions/Labs/lab-01-create-music-suggestion-agent.md)
 - [Create an AI travel agent app](Instructions/Labs/lab-02-complete-ai-travel-agent.md)
