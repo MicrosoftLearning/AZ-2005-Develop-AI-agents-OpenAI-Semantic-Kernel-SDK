@@ -4,22 +4,23 @@ permalink: index.html
 layout: home
 ---
 
-# Content Directory
+# Develop Generative AI solutions using Azure OpenAI and the Semantic Kernel SDK
 
-Hyperlinks to each of the lab exercises and demos are listed below.
+The following exercises are designed to provide you with a hands-on learning experience in which you'll explore common tasks that developers perform when building generative AI solutions with Semantic kernel and Azure OpenAI.
 
-## Labs
+> **Note**: To complete the exercises, you'll need an Azure subscription in which you have sufficient permissions and quota to provision the necessary Azure resources and generative AI models. If you don't already have one, you can sign up for an [Azure account](https://azure.microsoft.com/free). There's a free trial option for new users that includes credits for the first 30 days.
 
-{% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions/Labs'" %}
-| Module | Lab |
-| --- | --- | 
-{% for activity in labs  %}| {{ activity.lab.module }} | [{{ activity.lab.title }}{% if activity.lab.type %} - {{ activity.lab.type }}{% endif %}]({{ site.github.url }}{{ activity.url }}) |
+## Exercises
+
+{% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %}
+{% for activity in labs  %}
+<hr>
+### [{{ activity.lab.title }}]({{ site.github.url }}{{ activity.url }})
+
+{{activity.lab.description}}
+
 {% endfor %}
 
-## Demos
+> **Note**: While you can complete these exercises on their own, they're designed to complement modules on [Microsoft Learn](https://learn.microsoft.com/training/paths/develop-ai-agents-azure-open-ai-semantic-kernel-sdk/); in which you'll find a deeper dive into some of the underlying concepts on which these exercises are based.
 
-{% assign demos = site.pages | where_exp:"page", "page.url contains '/Instructions/Demos'" %}
-| Module | Demo |
-| --- | --- | 
-{% for activity in demos  %}| {{ activity.demo.module }} | [{{ activity.demo.title }}]({{ site.github.url }}{{ activity.url }}) |
-{% endfor %}
+
