@@ -1,5 +1,5 @@
 ---
-title: Online Hosted Instructions
+title: Develop Generative AI solutions with Semantic Kernel and Azure OpenAI
 permalink: index.html
 layout: home
 ---
