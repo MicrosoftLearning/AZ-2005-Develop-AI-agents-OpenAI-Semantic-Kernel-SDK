@@ -1,11 +1,14 @@
 ---
 lab:
-    title: 'Create a Devops Assistant with the Semantic Kernel SDK'
+    title: 'Create an AI Assistant with Semantic Kernel'
+    description: 'Learn how to use Semantic Kernel to build a generative AI assistant that can perform DevOps tasks.'
 ---
 
-# Create a Devops Assistant with the Semantic Kernel SDK
+# Create an AI Assistant with Semantic Kernel
 
-In this lab, you create the code for an AI assistant that TODO. You use the Semantic Kernel SDK to build the AI assistant and connect it to the large language model (LLM) service. The Semantic Kernel SDK allows you to create a smart application that can interact with the LLM service and provide personalized recommendations to the user.
+In this lab, you develop the code for an AI-powered assistant designed to automate development operations and help streamline tasks. You use the Semantic Kernel SDK to build the AI assistant and connect it to the large language model (LLM) service. The Semantic Kernel SDK allows you to create a smart application that can interact with the LLM service, respond to natural language queries, and provide personalized insights to the user. For this exercise, mock functions are provided to represent typical devops tasks. Let's get started!
+
+This exercise takes approximately **30** minutes.
 
 ## Deploy a chat completion model
 
@@ -457,6 +460,7 @@ In this lab, you create the code for an AI assistant that TODO. You use the Sema
 
     **Python**
     ```python
+    # Create a function filter
     async def permission_filter(context: FunctionInvocationContext, next: Callable[[FunctionInvocationContext], Awaitable[None]]) -> None:
         await next(context)
         result = context.result
